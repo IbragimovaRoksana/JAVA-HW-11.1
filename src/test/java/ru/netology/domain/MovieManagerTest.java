@@ -1,12 +1,23 @@
 package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.internal.stubbing.answers.Returns;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 class MovieManagerTest {
-    MovieManager manager = new MovieManager(10);
-    MovieManager movieManager = new MovieManager();
+    @Mock
+    private MovieRepository repository;
+    @InjectMocks
+    private MovieManager manager;
+
     Movie movie0 = new Movie();
     Movie movie1 = new Movie("1", "URl1", "The Terminator", "thriller");
     Movie movie2 = new Movie("2", "URl2", "The Green Mile", "drama");
@@ -27,14 +38,24 @@ class MovieManagerTest {
 
     @Test
     void shouldAddMovie() {
-        movieManager.add(movie15);
-        Movie[] actual = movieManager.findAll();
+        //настройка заглушки
+        Movie[] returned = new Movie[]{movie15};
+        Mockito.doReturn(returned).when(repository).findAll();
+
+        manager.add(movie15);
+        Movie[] actual = manager.findAll();
         Movie[] expected = new Movie[]{movie15};
         assertArrayEquals(expected, actual);
+        verify(repository).findAll();
     }
 
     @Test
     void shouldGetAllMoreTen() {
+        //настройка заглушки
+        Movie[] returned = new Movie[]{movie0, movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9,
+                movie10, movie11, movie12, movie13, movie14, movie15};
+        Mockito.doReturn(returned).when(repository).findAll();
+        manager.add(movie0);
         manager.add(movie1);
         manager.add(movie2);
         manager.add(movie3);
@@ -58,6 +79,9 @@ class MovieManagerTest {
 
     @Test
     void shouldGetAllLessTen() {
+        //настройка заглушки
+        Movie[] returned = new Movie[]{movie10, movie11, movie12, movie13, movie14, movie15};
+        Mockito.doReturn(returned).when(repository).findAll();
         manager.add(movie10);
         manager.add(movie11);
         manager.add(movie12);
@@ -72,6 +96,10 @@ class MovieManagerTest {
 
     @Test
     void shouldSetCountMovie() {
+        //настройка заглушки
+        Movie[] returned = new Movie[]{movie0, movie1, movie2, movie3, movie4, movie5,
+                movie6, movie7, movie8, movie9, movie10};
+        Mockito.doReturn(returned).when(repository).findAll();
         manager.add(movie0);
         manager.add(movie1);
         manager.add(movie2);

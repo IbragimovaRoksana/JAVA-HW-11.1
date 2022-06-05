@@ -10,4 +10,9 @@ public class Movie {
     private String imageUrl;
     private String name;
     private String ganre;
+
+    public String getId() {
+        return id;
+    }
+
 }

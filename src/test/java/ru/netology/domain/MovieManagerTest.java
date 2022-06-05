@@ -26,7 +26,7 @@ class MovieManagerTest {
 
 
     @Test
-    void shouldAddMovie(){
+    void shouldAddMovie() {
         movieManager.add(movie15);
         Movie[] actual = movieManager.findAll();
         Movie[] expected = new Movie[]{movie15};
@@ -34,7 +34,7 @@ class MovieManagerTest {
     }
 
     @Test
-    void shouldGetAllMoreTen(){
+    void shouldGetAllMoreTen() {
         manager.add(movie1);
         manager.add(movie2);
         manager.add(movie3);
@@ -57,7 +57,7 @@ class MovieManagerTest {
     }
 
     @Test
-    void shouldGetAllLessTen(){
+    void shouldGetAllLessTen() {
         manager.add(movie10);
         manager.add(movie11);
         manager.add(movie12);
@@ -71,7 +71,7 @@ class MovieManagerTest {
     }
 
     @Test
-    void shouldSetCountMovie(){
+    void shouldSetCountMovie() {
         manager.add(movie0);
         manager.add(movie1);
         manager.add(movie2);
@@ -84,7 +84,7 @@ class MovieManagerTest {
         manager.add(movie9);
         manager.add(movie10);
         manager.setCountMovie(4);
-        Movie[] actual =manager.findLast();
+        Movie[] actual = manager.findLast();
         Movie[] expected = new Movie[]{movie10, movie9, movie8, movie7};
         assertArrayEquals(expected, actual);
     }
